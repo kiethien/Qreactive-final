@@ -384,7 +384,7 @@ function MyQRCodesContent() {
                         >
                       </label>
                   </div>
-                  <img src={code.QRcode} alt={code.name} />
+                  <img src={code.QRcode} alt={code.name} style={{ width: '200px', height: '200px' }} />
                     <div className={MyQR.qrCodeInfo}>
                       <h3>{code.tag}</h3>
                       {code.type === "personal" && <p>link: {code.Link}</p>}
