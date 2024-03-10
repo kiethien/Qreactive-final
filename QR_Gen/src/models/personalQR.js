@@ -14,6 +14,9 @@ const personalQRSchema = new mongoose.Schema({
     Link: String,
     generatedAt: { type: Date, default: Date.now },
     type: { type: String, default: "personal" },
+    status: { type: String, default: "private" },
+    tag: { type: String, default: null },
+    DoS : { type: String, default: "static" },
 });
 
 const PersonalQR = mongoose.model('PersonalQR', personalQRSchema);

@@ -7,7 +7,8 @@ const linkQRSchema = new mongoose.Schema({
     QRcode: String,
     Link: String,
     generatedAt:{ type: Date, default: Date.now },
-    type: { type: String, default: "link" }
+    type: { type: String, default: "link" },
+    tag: { type: String, default: null },
 });
 
 const LinkQR = mongoose.model('LinkQR', linkQRSchema);

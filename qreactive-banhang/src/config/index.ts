@@ -27,6 +27,7 @@ export const NAV_LINKS = [
   { href: '/whyqr', key: 'why_qreactive', label: 'Why Qreactive?' },
   { href: '/qr_scanner', key: 'qr_scanner', label: 'Create Qr Code' },
   { href: '/faq', key: 'faq ', label: 'FAQ ' },
+  { href: '/search', key: 'search', label: 'Search' },
 ];
 
 // CAMP SECTION

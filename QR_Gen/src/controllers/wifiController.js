@@ -26,18 +26,19 @@ const generateWifiQR = async (req, res) => {
         }
 
         
-                const { name, encryption, password } = req.body;
+                const { name, encryption, password, tag } = req.body;
 
                 const wifiQRData = new WifiQR({
                     name,
                     encryption,
                     password,
                     account: currentAccount,
+                    tag,
                 });
 
 
                 // Generate QR code for WiFi
-                const wifiData = `Encryption: ${encryption}\nName: ${name}\nPassword: ${password}`;
+                const wifiData = `WIFI:T:WPA;S:${name};P:${password};;`;
                 const qrCodeDataUrl = await qr.toDataURL(wifiData);
                 wifiQRData.QRcode = qrCodeDataUrl;
                 wifiQRData.name = name;
@@ -94,9 +95,10 @@ const saveWifiChanges = async (req, res) => {
         }
 
         // Update WiFi data based on form submission
-        wifiQRData.name = req.body.SSID;
+        wifiQRData.name = req.body.ssid;
         wifiQRData.encryption = req.body.securityType;
         wifiQRData.password = req.body.password;
+        wifiQRData.tag = req.body.tag;
 
         // Update QR code
         const wifiData = `WIFI:T:${wifiQRData.name};S:${wifiQRData.encryption};P:${wifiQRData.password};;`;
@@ -107,7 +109,7 @@ const saveWifiChanges = async (req, res) => {
         await wifiQRData.save();
 
         // Redirect back to the QR code list
-        res.redirect('/qrList/list');
+        // res.redirect('/qrList/list');
     } catch (err) {
         console.error(err);
         res.status(500).send('Internal Server Error');

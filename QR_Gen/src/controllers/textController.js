@@ -23,6 +23,7 @@ const generateTextQR = async (req, res) => {
         }
             
         const  text  = req.body.qrText;
+        const tag = req.body.tag;
         console.log(req.body);
         console.log(text);
         
@@ -30,6 +31,7 @@ const generateTextQR = async (req, res) => {
         const textQRData = new TextQR({
             content: text,
             account: currentAccount,
+            tag : tag,
         });
 
         
@@ -40,6 +42,7 @@ const generateTextQR = async (req, res) => {
         // res.render('qr_text', { qrCodeDataUrl: qrCodeDataUrl});
         // textQRData.QRcode = qrCodeDataUrl;
         textQRData.Link = text;
+        textQRData.tag = req.body.tag;
         await textQRData.save();
         // Send the QR code image URL to the client
         res.json({ qrImageUrl: qrCodeDataUrl });
@@ -82,6 +85,7 @@ const saveTextChanges = async (req, res) => {
 
         // Update personal data based on form submission
         qrCode.content = req.body.text;
+        qrCode.tag = req.body.tag;
 
         // update QR code
         const qrCodeDataUrl = await qr.toDataURL(req.body.text);

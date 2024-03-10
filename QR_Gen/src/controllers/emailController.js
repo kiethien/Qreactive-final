@@ -57,7 +57,7 @@ const sendEmail = async (toEmail, subject, content) => {
       service: 'gmail',
       auth: {
         user: 'khoadh.bi12-215@st.usth.edu.vn', // Your Gmail email address
-        pass: '', // Your Gmail password or an application-specific password
+        pass: 'Thuhue271203', // Your Gmail password or an application-specific password
       },
     });
 

@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public vCard QR Codes</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Include your stylesheet here -->
+</head>
+<body>
+    <h1>Public vCard QR Codes</h1>
+    <% if (qrCodes.length > 0) { %>
+        <ul>
+            <% qrCodes.forEach(function(qrCode) { %>
+                <li>
+                    <p>Name: <%= qrCode.name %></p>
+                    <p>Email: <%= qrCode.email %></p>
+                    <!-- Render other details as needed -->
+                </li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>No public vCard QR codes found.</p>
+    <% } %>
+</body>
+</html>

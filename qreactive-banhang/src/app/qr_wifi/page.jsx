@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { getEmailUser } from '@/components/emailuser';
 
 // Importing styles
 import styles from './styles.module.css';
@@ -24,17 +25,21 @@ const QRPersonalGenerator = () => {
     const [securityType, setSecurityType] = useState('WPA/WPA2'); // Default security type
     const [password, setPassword] = useState('');
     const [qrImageUrl, setQrImageUrl] = useState('');
+    const [QR_Name, setQR_Name] = useState('');
 
     // Router instance
     const router = useRouter();
 
     const generateQr = async () => {
         try {
+            const email = getEmailUser();
             // Send the data to the backend for WiFi QR code generation
             const response = await axios.post('http://localhost:5000/wifi/generate', {
                 name: SSID,
                 encryption: securityType,
                 password: password,
+                tag: QR_Name,
+                email,
             });
 
             // Assuming the backend responds with the generated QR code URL
@@ -151,6 +156,21 @@ const QRPersonalGenerator = () => {
                             Password
                         </label>
                     </div>
+
+                    <div className={styles.input_group}>
+                        <input
+                            type="text"
+                            className={styles.input}
+                            id="QR_Name"
+                            value={QR_Name}
+                            onChange={(e) => setQR_Name(e.target.value)}
+                            required
+                        />
+                        <label htmlFor="QR_Name" className={styles.user_label}>
+                            QR Name
+                        </label>
+                    </div>
+
 
                     <div className={styles.button}>
                         <button className={styles.button1} onClick={generateQr}>Generate QR</button>

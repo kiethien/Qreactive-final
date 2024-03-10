@@ -19,6 +19,9 @@ const QRPersonalGenerator = () => {
     const [Website, setWebsite] = useState('');
     const [Position, setPosition] = useState('');
     const [Company, setCompany] = useState('');
+    const [Status, setStatus] = useState('private');
+    const [QR_Name, setQR_Name] = useState('');
+    const [DoS, setDoS] = useState('static');
 
     const [qrImageUrl, setQrImageUrl] = useState('');
     // Router instance
@@ -51,6 +54,34 @@ const QRPersonalGenerator = () => {
                 position: Position,
                 company: Company,
                 emailUser,
+                status: Status,
+                tag: QR_Name,
+                DoS: DoS,
+            });
+
+            // Assuming the backend responds with the generated QR code URL
+            setQrImageUrl(response.data.qrImageUrl);
+        } catch (error) {
+            console.error('Error generating QR code:', error);
+        }
+    };
+
+    const generateDynamic = async () => {
+        try {
+            const emailUser = getEmailUser();
+            // Send the link to the backend for QR code generation
+            const response = await axios.post('http://localhost:5000/personalQR/generateDynamic', {
+                name: Name,
+                email: Email,
+                phone: Phone,
+                address: Address,
+                website: Website,
+                position: Position,
+                company: Company,
+                emailUser,
+                status: Status,
+                tag: QR_Name,
+                DoS: DoS,
             });
 
             // Assuming the backend responds with the generated QR code URL
@@ -215,8 +246,51 @@ const QRPersonalGenerator = () => {
                             Company
                         </label>
                     </div>
+
+                    <div className={styles.input_group}>
+                        <select
+                            className={styles.input}
+                            id="status"
+                            value={Status}
+                            onChange={(e) => setStatus(e.target.value)}
+                        >
+                            <option>private</option>
+                            <option>public</option>
+                        </select>
+                    </div>
+
+                    <div className={styles.input_group}>
+                        <input
+                            type="text"
+                            className={styles.input}
+                            id="QR_Name"
+                            value={QR_Name}
+                            onChange={(e) => setQR_Name(e.target.value)}
+                            required
+                        />
+                        <label htmlFor="QR_Name" className={styles.user_label}>
+                            QR Name
+                        </label>
+                    </div>
+                    
+                    <div className={styles.input_group}>
+                        <select
+                            className={styles.input}
+                            id="DoS"
+                            value={DoS}
+                            onChange={(e) => setDoS(e.target.value)}
+                        >
+                            <option>static</option>
+                            <option>dynamic</option>
+                        </select>
+                    </div>
+                    
                     <div className={styles.button}>
-                        <button className={styles.button1} onClick={generateQr}>Generate QR</button>
+                    {DoS === 'static' ? (
+                            <button className={styles.button1} onClick={generateQr}>Generate Static</button>
+                        ) : (
+                            <button className={styles.button1} onClick={generateDynamic}>Generate Dynamic</button>
+                        )}
                     </div>
                     {qrImageUrl && <img src={qrImageUrl} alt="Generated QR Code"/>}
                 </div>
