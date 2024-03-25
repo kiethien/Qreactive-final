@@ -18,13 +18,15 @@
     width: var(--width);
     height: var(--height);
     background: var(--button-color);
-    position: relative;
+    position: absolute;
     text-align: center;
-    border-radius: 0.45em;
+    border-radius: 0.45em;  
     font-family: "Arial";
     transition: background 0.3s;
+    margin-inline: 145px;
+    margin-top: 40px;
+    
   }
-  
   .button::before {
     position: absolute;
     content: attr(data-tooltip);
@@ -117,6 +119,7 @@
     bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
   }</style>
 <body class = "container">
+  <div>
     <div class = "profileBox">
     <img src="/frame_0_delay-0.01s.jpg" alt="Blue Image" class="profile-pic" >
     
@@ -132,13 +135,15 @@
     </div>
     </div>
     <div class="button" onclick="downloadVCard()">
-        <div class="button-wrapper">
-          <div class="text">Download</div>
-            <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"></path></svg>
-            </span>
-          </div>
-    </div>
+      <div class="button-wrapper">
+        <div class="text">Download</div>
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"></path></svg>
+          </span>
+        </div>
+  </div>
+</div>
+    
     <script>
         // Function to trigger the download of a vCard file
         function downloadVCard() {
