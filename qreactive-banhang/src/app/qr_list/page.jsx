@@ -396,6 +396,7 @@ function MyQRCodesContent() {
                       
                       {code.type === "wifi" && <p>Password: {code.password}</p>}
                       {code.type === "personal" && <p>Status: {code.status}</p>}
+                      {code.type === "personal" && <p>Tag: {code.DoS}</p>}
                       <p>Created: {code.generatedAt}</p>
                     </div>
 
